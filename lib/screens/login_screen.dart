@@ -1,6 +1,9 @@
 import 'package:android_core_flutter/screens/register_screen.dart';
+import 'package:android_core_flutter/screens/restaurants_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:android_core_flutter/strings.dart';
+
+import '../utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,49 +19,59 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Column(
-              children: <Widget>[
-                const SizedBox(height: 40),
-                const TextField(
+              children: const <Widget>[
+                TextField(
                   decoration: InputDecoration(
                     hintText: Strings.email,
                   ),
                 ),
-                const TextField(
+                TextField(
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: Strings.password,
-                  ),
-                ),
-                const SizedBox(height: 80),
-                ElevatedButton(
-                  onPressed: () => {},
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                    primary: Colors.red,
-                  ),
-                  child: Text(
-                    Strings.login.toUpperCase(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: Row(
-                    children: <Widget>[
-                      const Expanded(child: Divider()),
-                      Text(Strings.or.toUpperCase()),
-                      const Expanded(child: Divider())
-                    ],
                   ),
                 ),
               ],
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      goToScreen(true, context, const RestaurantsScreen());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      primary: Colors.red,
+                    ),
+                    child: Text(
+                      Strings.login.toUpperCase(),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      bottom: 30,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        const Expanded(
+                            child: Divider(
+                          thickness: 1,
+                        )),
+                        Text(Strings.or.toUpperCase()),
+                        const Expanded(
+                            child: Divider(
+                          thickness: 1,
+                        ))
+                      ],
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () => {
                       goToScreen(
+                        false,
                         context,
                         const RegisterScreen(),
                       )
@@ -77,12 +90,6 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  void goToScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => screen),
     );
   }
 }
